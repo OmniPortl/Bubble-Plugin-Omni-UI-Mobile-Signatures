@@ -1,5 +1,9 @@
 {
+    "add_hover_pressed": true,
     "add_is_visible": true,
+    "autobinding_value": "image",
+    "can_fit_height": true,
+    "can_fit_width": true,
     "category": "visual elements",
     "default_dim": {
         "height": 200,
@@ -7,5 +11,15 @@
     },
     "display": "Web Signature Pad",
     "icon": "ion-edit",
-    "platform_type": "web"
+    "platform_type": "web",
+    "property_applications": {
+        "Background": true,
+        "Border": true,
+        "BoxShadow": true,
+        "Font": true,
+        "MinWidth": true,
+        "Padding": true,
+        "resizable": true
+    },
+    "support_autobinding": true
 }
