@@ -1,15 +1,295 @@
 {
     "add_hover_pressed": true,
     "add_is_visible": true,
+    "autobinding_is_list": false,
     "autobinding_value": "image",
     "can_fit_height": true,
     "can_fit_width": true,
-    "category": "visual elements",
+    "category": "input forms",
     "default_dim": {
         "height": 200,
         "width": 400
     },
     "display": "Web Signature Pad",
+    "events": {
+        "AAj": {
+            "caption": "Signature Started",
+            "name": "signature_started"
+        },
+        "AAk": {
+            "caption": "Signature Changed",
+            "name": "signature_changed"
+        },
+        "AAl": {
+            "caption": "Signature Ended",
+            "name": "signature_ended"
+        },
+        "AAm": {
+            "caption": "Signature Saved",
+            "name": "signature_saved"
+        },
+        "AAn": {
+            "caption": "Signature Cleared",
+            "name": "signature_cleared"
+        },
+        "AAo": {
+            "caption": "Signature Error",
+            "name": "signature_error"
+        }
+    },
+    "fields": {
+        "AAp": {
+            "caption": "Data / Behavior",
+            "editor": "Label",
+            "name": "data_behavior_settings",
+            "rank": 0
+        },
+        "AAq": {
+            "caption": "Initial Signature",
+            "doc": "Optional Bubble image, image URL, or signature data URL used to seed the pad when the value changes.",
+            "editor": "DynamicValue",
+            "name": "initial_signature",
+            "optional": true,
+            "rank": 1,
+            "value": "image"
+        },
+        "AAr": {
+            "caption": "Enabled",
+            "default_val": true,
+            "editor": "DynamicValue",
+            "name": "enabled",
+            "optional": true,
+            "rank": 2,
+            "value": "boolean"
+        },
+        "AAs": {
+            "caption": "Commit Behavior",
+            "default_val": "on_stroke_end",
+            "doc": "Controls when the data URL is uploaded into Bubble's image value. Manual waits for the Save signature action or toolbar button.",
+            "editor": "Dropdown",
+            "name": "commit_behavior",
+            "options": "on_stroke_end,manual",
+            "rank": 3
+        },
+        "AAt": {
+            "caption": "Commit Delay Milliseconds",
+            "default_val": 500,
+            "editor": "DynamicValue",
+            "name": "commit_delay_ms",
+            "optional": true,
+            "rank": 4,
+            "value": "number"
+        },
+        "AAu": {
+            "caption": "File Name Prefix",
+            "default_val": "signature",
+            "editor": "DynamicValue",
+            "name": "file_name_prefix",
+            "optional": true,
+            "rank": 5,
+            "value": "text"
+        },
+        "AAv": {
+            "caption": "Output",
+            "editor": "Label",
+            "name": "output_settings",
+            "rank": 6
+        },
+        "AAw": {
+            "caption": "Output Format",
+            "default_val": "png",
+            "editor": "Dropdown",
+            "name": "output_format",
+            "options": "png,jpeg",
+            "rank": 7
+        },
+        "AAx": {
+            "caption": "JPEG Quality",
+            "default_val": 0.92,
+            "editor": "DynamicValue",
+            "name": "jpeg_quality",
+            "optional": true,
+            "rank": 8,
+            "value": "number"
+        },
+        "AAy": {
+            "caption": "Drawing",
+            "editor": "Label",
+            "name": "drawing_settings",
+            "rank": 9
+        },
+        "AAz": {
+            "caption": "Pen Color",
+            "default_val": "#111827",
+            "editor": "Color",
+            "in_style": true,
+            "name": "pen_color",
+            "optional": true,
+            "rank": 10
+        },
+        "ABA": {
+            "caption": "Minimum Stroke Width",
+            "default_val": 0.5,
+            "editor": "DynamicValue",
+            "in_style": true,
+            "name": "min_width",
+            "optional": true,
+            "rank": 11,
+            "value": "number"
+        },
+        "ABB": {
+            "caption": "Maximum Stroke Width",
+            "default_val": 2.5,
+            "editor": "DynamicValue",
+            "in_style": true,
+            "name": "max_width",
+            "optional": true,
+            "rank": 12,
+            "value": "number"
+        },
+        "ABC": {
+            "caption": "Background Color",
+            "default_val": "#ffffff",
+            "editor": "Color",
+            "in_style": true,
+            "name": "background_color",
+            "optional": true,
+            "rank": 13
+        },
+        "ABD": {
+            "caption": "Minimum Point Distance",
+            "default_val": 5,
+            "editor": "DynamicValue",
+            "name": "min_distance",
+            "optional": true,
+            "rank": 14,
+            "value": "number"
+        },
+        "ABE": {
+            "caption": "Throttle Milliseconds",
+            "default_val": 16,
+            "editor": "DynamicValue",
+            "name": "throttle_ms",
+            "optional": true,
+            "rank": 15,
+            "value": "number"
+        },
+        "ABF": {
+            "caption": "UI",
+            "editor": "Label",
+            "name": "ui_settings",
+            "rank": 16
+        },
+        "ABG": {
+            "caption": "Placeholder Text",
+            "default_val": "Sign here",
+            "editor": "DynamicValue",
+            "name": "placeholder_text",
+            "optional": true,
+            "rank": 17,
+            "value": "text"
+        },
+        "ABH": {
+            "caption": "Show Toolbar",
+            "default_val": true,
+            "editor": "DynamicValue",
+            "name": "show_toolbar",
+            "optional": true,
+            "rank": 18,
+            "value": "boolean"
+        },
+        "ABI": {
+            "caption": "Show Clear Button",
+            "default_val": true,
+            "editor": "DynamicValue",
+            "name": "show_clear_button",
+            "optional": true,
+            "rank": 19,
+            "value": "boolean"
+        },
+        "ABJ": {
+            "caption": "Show Undo Button",
+            "default_val": true,
+            "editor": "DynamicValue",
+            "name": "show_undo_button",
+            "optional": true,
+            "rank": 20,
+            "value": "boolean"
+        },
+        "ABK": {
+            "caption": "Show Save Button",
+            "default_val": true,
+            "editor": "DynamicValue",
+            "name": "show_save_button",
+            "optional": true,
+            "rank": 21,
+            "value": "boolean"
+        },
+        "ABL": {
+            "caption": "Clear Button Label",
+            "default_val": "Clear",
+            "editor": "DynamicValue",
+            "name": "clear_button_label",
+            "optional": true,
+            "rank": 22,
+            "value": "text"
+        },
+        "ABM": {
+            "caption": "Undo Button Label",
+            "default_val": "Undo",
+            "editor": "DynamicValue",
+            "name": "undo_button_label",
+            "optional": true,
+            "rank": 23,
+            "value": "text"
+        },
+        "ABN": {
+            "caption": "Save Button Label",
+            "default_val": "Save",
+            "editor": "DynamicValue",
+            "name": "save_button_label",
+            "optional": true,
+            "rank": 24,
+            "value": "text"
+        },
+        "ABO": {
+            "caption": "Toolbar Background Color",
+            "default_val": "#f8fafc",
+            "editor": "Color",
+            "in_style": true,
+            "name": "toolbar_background_color",
+            "optional": true,
+            "rank": 25
+        },
+        "ABP": {
+            "caption": "Button Background Color",
+            "default_val": "#ffffff",
+            "editor": "Color",
+            "in_style": true,
+            "name": "button_background_color",
+            "optional": true,
+            "rank": 26
+        },
+        "ABQ": {
+            "caption": "Button Text Color",
+            "default_val": "#111827",
+            "editor": "Color",
+            "in_style": true,
+            "name": "button_text_color",
+            "optional": true,
+            "rank": 27
+        },
+        "ABR": {
+            "caption": "Button Border Color",
+            "default_val": "#cbd5e1",
+            "editor": "Color",
+            "in_style": true,
+            "name": "button_border_color",
+            "optional": true,
+            "rank": 28
+        }
+    },
+    "has_reset_fn": true,
     "icon": "ion-edit",
     "platform_type": "web",
     "property_applications": {
@@ -20,6 +300,50 @@
         "MinWidth": true,
         "Padding": true,
         "resizable": true
+    },
+    "states": {
+        "ABS": {
+            "caption": "Value",
+            "name": "value",
+            "rank": 0,
+            "value": "image"
+        },
+        "ABT": {
+            "caption": "Signature Data URL",
+            "name": "signature_data_url",
+            "rank": 1,
+            "value": "text"
+        },
+        "ABU": {
+            "caption": "Is Empty",
+            "name": "is_empty",
+            "rank": 2,
+            "value": "boolean"
+        },
+        "ABV": {
+            "caption": "Is Drawing",
+            "name": "is_drawing",
+            "rank": 3,
+            "value": "boolean"
+        },
+        "ABW": {
+            "caption": "Is Uploading",
+            "name": "is_uploading",
+            "rank": 4,
+            "value": "boolean"
+        },
+        "ABX": {
+            "caption": "Stroke Count",
+            "name": "stroke_count",
+            "rank": 5,
+            "value": "number"
+        },
+        "ABY": {
+            "caption": "Last Error",
+            "name": "last_error",
+            "rank": 6,
+            "value": "text"
+        }
     },
     "support_autobinding": true
 }

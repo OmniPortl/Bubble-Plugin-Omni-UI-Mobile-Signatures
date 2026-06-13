@@ -1,0 +1,13 @@
+{
+    "caption": "Set enabled",
+    "fields": {
+        "AAC": {
+            "caption": "Enabled",
+            "editor": "DynamicValue",
+            "name": "enabled",
+            "optional": false,
+            "rank": 0,
+            "value": "boolean"
+        }
+    }
+}
