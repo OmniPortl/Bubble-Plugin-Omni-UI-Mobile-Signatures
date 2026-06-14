@@ -3,11 +3,10 @@
     "fields": {
         "AAC": {
             "caption": "Enabled",
-            "editor": "DynamicValue",
+            "editor": "Checkbox",
             "name": "enabled",
             "optional": false,
-            "rank": 0,
-            "value": "boolean"
+            "rank": 0
         }
     }
 }

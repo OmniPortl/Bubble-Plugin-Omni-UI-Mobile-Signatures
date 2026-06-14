@@ -56,11 +56,10 @@
         "AAr": {
             "caption": "Enabled",
             "default_val": true,
-            "editor": "DynamicValue",
+            "editor": "Checkbox",
             "name": "enabled",
             "optional": true,
-            "rank": 2,
-            "value": "boolean"
+            "rank": 2
         },
         "AAs": {
             "caption": "Commit Behavior",
@@ -192,38 +191,34 @@
         "ABH": {
             "caption": "Show Toolbar",
             "default_val": true,
-            "editor": "DynamicValue",
+            "editor": "Checkbox",
             "name": "show_toolbar",
             "optional": true,
-            "rank": 18,
-            "value": "boolean"
+            "rank": 18
         },
         "ABI": {
             "caption": "Show Clear Button",
             "default_val": true,
-            "editor": "DynamicValue",
+            "editor": "Checkbox",
             "name": "show_clear_button",
             "optional": true,
-            "rank": 19,
-            "value": "boolean"
+            "rank": 19
         },
         "ABJ": {
             "caption": "Show Undo Button",
             "default_val": true,
-            "editor": "DynamicValue",
+            "editor": "Checkbox",
             "name": "show_undo_button",
             "optional": true,
-            "rank": 20,
-            "value": "boolean"
+            "rank": 20
         },
         "ABK": {
             "caption": "Show Save Button",
             "default_val": true,
-            "editor": "DynamicValue",
+            "editor": "Checkbox",
             "name": "show_save_button",
             "optional": true,
-            "rank": 21,
-            "value": "boolean"
+            "rank": 21
         },
         "ABL": {
             "caption": "Clear Button Label",
