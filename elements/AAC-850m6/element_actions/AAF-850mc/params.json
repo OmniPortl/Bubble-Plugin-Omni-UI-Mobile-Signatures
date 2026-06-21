@@ -1,3 +1,4 @@
 {
-    "caption": "Clear signature"
+    "caption": "Clear signature",
+    "doc": "Clears the current signature, resets drawing states, clears autobinding, and triggers Signature Cleared."
 }

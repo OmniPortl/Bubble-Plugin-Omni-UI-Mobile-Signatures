@@ -1,3 +1,4 @@
 {
-    "caption": "Save signature"
+    "caption": "Save signature",
+    "doc": "Uploads the current web signature image to Bubble and publishes the uploaded file URL to the Value state."
 }

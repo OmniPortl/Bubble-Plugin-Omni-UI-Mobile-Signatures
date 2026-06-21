@@ -40,6 +40,7 @@
     "fields": {
         "AAp": {
             "caption": "Data / Behavior",
+            "doc": "Settings that control the starting value, user interaction, and when the signature image is uploaded to Bubble.",
             "editor": "Label",
             "name": "data_behavior_settings",
             "rank": 0
@@ -56,6 +57,7 @@
         "AAr": {
             "caption": "Enabled",
             "default_val": true,
+            "doc": "When checked, users can draw and toolbar buttons can run. When unchecked, the pad stays visible but does not accept drawing input.",
             "editor": "Checkbox",
             "name": "enabled",
             "optional": true,
@@ -73,6 +75,7 @@
         "AAt": {
             "caption": "Commit Delay Milliseconds",
             "default_val": 500,
+            "doc": "Delay after a stroke ends before auto-upload runs. Only applies when Commit Behavior is on_stroke_end.",
             "editor": "DynamicValue",
             "name": "commit_delay_ms",
             "optional": true,
@@ -82,6 +85,7 @@
         "AAu": {
             "caption": "File Name Prefix",
             "default_val": "signature",
+            "doc": "Prefix used for uploaded image file names. The plugin adds a timestamp and the selected file extension.",
             "editor": "DynamicValue",
             "name": "file_name_prefix",
             "optional": true,
@@ -90,6 +94,7 @@
         },
         "AAv": {
             "caption": "Output",
+            "doc": "Settings that control the web element's raster image export.",
             "editor": "Label",
             "name": "output_settings",
             "rank": 6
@@ -97,6 +102,7 @@
         "AAw": {
             "caption": "Output Format",
             "default_val": "png",
+            "doc": "Image format used when saving the web signature. The native mobile element saves SVG only.",
             "editor": "Dropdown",
             "name": "output_format",
             "options": "png,jpeg",
@@ -105,6 +111,7 @@
         "AAx": {
             "caption": "JPEG Quality",
             "default_val": 0.92,
+            "doc": "JPEG compression quality from 0 to 1. Only applies when Output Format is jpeg.",
             "editor": "DynamicValue",
             "name": "jpeg_quality",
             "optional": true,
@@ -113,6 +120,7 @@
         },
         "AAy": {
             "caption": "Drawing",
+            "doc": "Settings that control stroke color, stroke width, point capture, and pad background.",
             "editor": "Label",
             "name": "drawing_settings",
             "rank": 9
@@ -120,6 +128,7 @@
         "AAz": {
             "caption": "Pen Color",
             "default_val": "#111827",
+            "doc": "Color used for new signature strokes.",
             "editor": "Color",
             "in_style": true,
             "name": "pen_color",
@@ -129,6 +138,7 @@
         "ABA": {
             "caption": "Minimum Stroke Width",
             "default_val": 0.5,
+            "doc": "Minimum stroke width used by the web signature drawing engine.",
             "editor": "DynamicValue",
             "in_style": true,
             "name": "min_width",
@@ -139,6 +149,7 @@
         "ABB": {
             "caption": "Maximum Stroke Width",
             "default_val": 2.5,
+            "doc": "Maximum stroke width used by the web signature drawing engine.",
             "editor": "DynamicValue",
             "in_style": true,
             "name": "max_width",
@@ -149,6 +160,7 @@
         "ABC": {
             "caption": "Background Color",
             "default_val": "#ffffff",
+            "doc": "Background color behind the signature and inside exported raster images.",
             "editor": "Color",
             "in_style": true,
             "name": "background_color",
@@ -158,6 +170,7 @@
         "ABD": {
             "caption": "Minimum Point Distance",
             "default_val": 5,
+            "doc": "Minimum distance a pointer must move before another point is recorded. Higher values produce simpler paths.",
             "editor": "DynamicValue",
             "name": "min_distance",
             "optional": true,
@@ -167,6 +180,7 @@
         "ABE": {
             "caption": "Throttle Milliseconds",
             "default_val": 16,
+            "doc": "Minimum time between recorded move points while drawing. Lower values capture more detail.",
             "editor": "DynamicValue",
             "name": "throttle_ms",
             "optional": true,
@@ -175,6 +189,7 @@
         },
         "ABF": {
             "caption": "UI",
+            "doc": "Toolbar, labels, and button style settings for the visible signature control.",
             "editor": "Label",
             "name": "ui_settings",
             "rank": 16
@@ -182,6 +197,7 @@
         "ABG": {
             "caption": "Placeholder Text",
             "default_val": "Sign here",
+            "doc": "Text shown centered in the pad while no signature is present.",
             "editor": "DynamicValue",
             "name": "placeholder_text",
             "optional": true,
@@ -191,6 +207,7 @@
         "ABH": {
             "caption": "Show Toolbar",
             "default_val": true,
+            "doc": "Shows or hides the toolbar container at the bottom of the element.",
             "editor": "Checkbox",
             "name": "show_toolbar",
             "optional": true,
@@ -199,6 +216,7 @@
         "ABI": {
             "caption": "Show Clear Button",
             "default_val": true,
+            "doc": "Shows or hides the Clear button in the toolbar.",
             "editor": "Checkbox",
             "name": "show_clear_button",
             "optional": true,
@@ -207,6 +225,7 @@
         "ABJ": {
             "caption": "Show Undo Button",
             "default_val": true,
+            "doc": "Shows or hides the Undo button in the toolbar.",
             "editor": "Checkbox",
             "name": "show_undo_button",
             "optional": true,
@@ -215,6 +234,7 @@
         "ABK": {
             "caption": "Show Save Button",
             "default_val": true,
+            "doc": "Shows or hides the Save button in the toolbar. The workflow action can still save when this is hidden.",
             "editor": "Checkbox",
             "name": "show_save_button",
             "optional": true,
@@ -223,6 +243,7 @@
         "ABL": {
             "caption": "Clear Button Label",
             "default_val": "Clear",
+            "doc": "Text displayed inside the Clear toolbar button.",
             "editor": "DynamicValue",
             "name": "clear_button_label",
             "optional": true,
@@ -232,6 +253,7 @@
         "ABM": {
             "caption": "Undo Button Label",
             "default_val": "Undo",
+            "doc": "Text displayed inside the Undo toolbar button.",
             "editor": "DynamicValue",
             "name": "undo_button_label",
             "optional": true,
@@ -241,6 +263,7 @@
         "ABN": {
             "caption": "Save Button Label",
             "default_val": "Save",
+            "doc": "Text displayed inside the Save toolbar button.",
             "editor": "DynamicValue",
             "name": "save_button_label",
             "optional": true,
@@ -250,6 +273,7 @@
         "ABO": {
             "caption": "Toolbar Background Color",
             "default_val": "#f8fafc",
+            "doc": "Background color of the toolbar area.",
             "editor": "Color",
             "in_style": true,
             "name": "toolbar_background_color",
@@ -259,6 +283,7 @@
         "ABP": {
             "caption": "Button Background Color",
             "default_val": "#ffffff",
+            "doc": "Background color used for toolbar buttons.",
             "editor": "Color",
             "in_style": true,
             "name": "button_background_color",
@@ -268,6 +293,7 @@
         "ABQ": {
             "caption": "Button Text Color",
             "default_val": "#111827",
+            "doc": "Text color used inside toolbar buttons.",
             "editor": "Color",
             "in_style": true,
             "name": "button_text_color",
@@ -277,6 +303,7 @@
         "ABR": {
             "caption": "Button Border Color",
             "default_val": "#cbd5e1",
+            "doc": "Border color used around toolbar buttons.",
             "editor": "Color",
             "in_style": true,
             "name": "button_border_color",
@@ -299,42 +326,49 @@
     "states": {
         "ABS": {
             "caption": "Value",
+            "doc": "Bubble image value containing the uploaded PNG or JPEG file URL after a successful save.",
             "name": "value",
             "rank": 0,
             "value": "image"
         },
         "ABT": {
             "caption": "Signature Data URL",
+            "doc": "Current signature as a data:image/png or data:image/jpeg URL. Updates while drawing and before upload.",
             "name": "signature_data_url",
             "rank": 1,
             "value": "text"
         },
         "ABU": {
             "caption": "Is Empty",
+            "doc": "Yes when there is no loaded signature and no drawn stroke.",
             "name": "is_empty",
             "rank": 2,
             "value": "boolean"
         },
         "ABV": {
             "caption": "Is Drawing",
+            "doc": "Yes while the user is actively drawing a stroke.",
             "name": "is_drawing",
             "rank": 3,
             "value": "boolean"
         },
         "ABW": {
             "caption": "Is Uploading",
+            "doc": "Yes while the signature image is being uploaded to Bubble.",
             "name": "is_uploading",
             "rank": 4,
             "value": "boolean"
         },
         "ABX": {
             "caption": "Stroke Count",
+            "doc": "Number of user-drawn strokes currently stored.",
             "name": "stroke_count",
             "rank": 5,
             "value": "number"
         },
         "ABY": {
             "caption": "Last Error",
+            "doc": "Most recent runtime error message, or blank when the last operation succeeded.",
             "name": "last_error",
             "rank": 6,
             "value": "text"

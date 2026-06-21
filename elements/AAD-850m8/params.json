@@ -40,13 +40,14 @@
     "fields": {
         "AAp": {
             "caption": "Data / Behavior",
+            "doc": "Settings that control the starting value, user interaction, and when the SVG signature is uploaded to Bubble.",
             "editor": "Label",
             "name": "data_behavior_settings",
             "rank": 0
         },
         "AAq": {
             "caption": "Initial Signature",
-            "doc": "Optional Bubble image, image URL, or signature data URL used to seed the pad when the value changes.",
+            "doc": "Optional Bubble image, image URL, SVG data URL, or image data URL shown as the starting signature. It is displayed as a background image layer and new strokes are drawn on top.",
             "editor": "DynamicValue",
             "name": "initial_signature",
             "optional": true,
@@ -56,6 +57,7 @@
         "AAr": {
             "caption": "Enabled",
             "default_val": true,
+            "doc": "When checked, users can draw and toolbar buttons can run. When unchecked, the pad stays visible but does not accept drawing input.",
             "editor": "Checkbox",
             "name": "enabled",
             "optional": true,
@@ -64,7 +66,7 @@
         "AAs": {
             "caption": "Commit Behavior",
             "default_val": "on_stroke_end",
-            "doc": "Controls when the data URL is uploaded into Bubble's image value. Manual waits for the Save signature action or toolbar button.",
+            "doc": "Controls when the SVG signature is uploaded into Bubble's image value. on_stroke_end uploads after each completed stroke. manual waits for the Save signature action or toolbar button.",
             "editor": "Dropdown",
             "name": "commit_behavior",
             "options": "on_stroke_end,manual",
@@ -73,6 +75,7 @@
         "AAt": {
             "caption": "Commit Delay Milliseconds",
             "default_val": 500,
+            "doc": "Delay after a stroke ends before auto-upload runs. Only applies when Commit Behavior is on_stroke_end.",
             "editor": "DynamicValue",
             "name": "commit_delay_ms",
             "optional": true,
@@ -82,6 +85,7 @@
         "AAu": {
             "caption": "File Name Prefix",
             "default_val": "signature",
+            "doc": "Prefix used for uploaded SVG file names. The plugin adds a timestamp and .svg extension.",
             "editor": "DynamicValue",
             "name": "file_name_prefix",
             "optional": true,
@@ -89,199 +93,203 @@
             "value": "text"
         },
         "AAv": {
-            "caption": "Output",
+            "caption": "SVG Output",
+            "doc": "Native mobile signatures are saved as SVG files. The Signature Data URL state also returns an SVG data URL.",
             "editor": "Label",
             "name": "output_settings",
             "rank": 6
         },
-        "AAw": {
-            "caption": "Output Format",
-            "default_val": "png",
-            "editor": "Dropdown",
-            "name": "output_format",
-            "options": "png,jpeg",
-            "rank": 7
-        },
-        "AAx": {
-            "caption": "JPEG Quality",
-            "default_val": 0.92,
-            "editor": "DynamicValue",
-            "name": "jpeg_quality",
-            "optional": true,
-            "rank": 8,
-            "value": "number"
-        },
         "AAy": {
             "caption": "Drawing",
+            "doc": "Settings that control SVG stroke color, stroke width, smoothing, and pad background.",
             "editor": "Label",
             "name": "drawing_settings",
-            "rank": 9
+            "rank": 7
         },
         "AAz": {
             "caption": "Pen Color",
             "default_val": "#111827",
+            "doc": "Color used for new signature strokes.",
             "editor": "Color",
             "in_style": true,
             "name": "pen_color",
             "optional": true,
-            "rank": 10
+            "rank": 8
         },
         "ABA": {
             "caption": "Minimum Stroke Width",
             "default_val": 0.5,
+            "doc": "Lower stroke-width bound used to calculate the SVG stroke width.",
             "editor": "DynamicValue",
             "in_style": true,
             "name": "min_width",
             "optional": true,
-            "rank": 11,
+            "rank": 9,
             "value": "number"
         },
         "ABB": {
             "caption": "Maximum Stroke Width",
             "default_val": 2.5,
+            "doc": "Upper stroke-width bound used to calculate the SVG stroke width.",
             "editor": "DynamicValue",
             "in_style": true,
             "name": "max_width",
             "optional": true,
-            "rank": 12,
+            "rank": 10,
             "value": "number"
         },
         "ABC": {
             "caption": "Background Color",
             "default_val": "#ffffff",
+            "doc": "Background fill used inside the signature SVG and visible drawing area.",
             "editor": "Color",
             "in_style": true,
             "name": "background_color",
             "optional": true,
-            "rank": 13
+            "rank": 11
         },
         "ABD": {
             "caption": "Minimum Point Distance",
             "default_val": 5,
+            "doc": "Minimum distance a pointer must move before another point is recorded. Higher values produce smaller, simpler SVG paths.",
             "editor": "DynamicValue",
             "name": "min_distance",
             "optional": true,
-            "rank": 14,
+            "rank": 12,
             "value": "number"
         },
         "ABE": {
             "caption": "Throttle Milliseconds",
             "default_val": 16,
+            "doc": "Minimum time between recorded move points while drawing. Lower values capture more detail; higher values reduce path size.",
             "editor": "DynamicValue",
             "name": "throttle_ms",
             "optional": true,
-            "rank": 15,
+            "rank": 13,
             "value": "number"
         },
         "ABF": {
             "caption": "UI",
+            "doc": "Toolbar, labels, and button style settings for the visible signature control.",
             "editor": "Label",
             "name": "ui_settings",
-            "rank": 16
+            "rank": 14
         },
         "ABG": {
             "caption": "Placeholder Text",
             "default_val": "Sign here",
+            "doc": "Text shown centered in the pad while no initial signature or drawn strokes are present.",
             "editor": "DynamicValue",
             "name": "placeholder_text",
             "optional": true,
-            "rank": 17,
+            "rank": 15,
             "value": "text"
         },
         "ABH": {
             "caption": "Show Toolbar",
             "default_val": true,
+            "doc": "Shows or hides the toolbar container at the bottom of the element.",
             "editor": "Checkbox",
             "name": "show_toolbar",
             "optional": true,
-            "rank": 18
+            "rank": 16
         },
         "ABI": {
             "caption": "Show Clear Button",
             "default_val": true,
+            "doc": "Shows or hides the Clear button in the toolbar.",
             "editor": "Checkbox",
             "name": "show_clear_button",
             "optional": true,
-            "rank": 19
+            "rank": 17
         },
         "ABJ": {
             "caption": "Show Undo Button",
             "default_val": true,
+            "doc": "Shows or hides the Undo button in the toolbar.",
             "editor": "Checkbox",
             "name": "show_undo_button",
             "optional": true,
-            "rank": 20
+            "rank": 18
         },
         "ABK": {
             "caption": "Show Save Button",
             "default_val": true,
+            "doc": "Shows or hides the Save button in the toolbar. The workflow action can still save when this is hidden.",
             "editor": "Checkbox",
             "name": "show_save_button",
             "optional": true,
-            "rank": 21
+            "rank": 19
         },
         "ABL": {
             "caption": "Clear Button Label",
             "default_val": "Clear",
+            "doc": "Text displayed inside the Clear toolbar button.",
             "editor": "DynamicValue",
             "name": "clear_button_label",
             "optional": true,
-            "rank": 22,
+            "rank": 20,
             "value": "text"
         },
         "ABM": {
             "caption": "Undo Button Label",
             "default_val": "Undo",
+            "doc": "Text displayed inside the Undo toolbar button.",
             "editor": "DynamicValue",
             "name": "undo_button_label",
             "optional": true,
-            "rank": 23,
+            "rank": 21,
             "value": "text"
         },
         "ABN": {
             "caption": "Save Button Label",
             "default_val": "Save",
+            "doc": "Text displayed inside the Save toolbar button.",
             "editor": "DynamicValue",
             "name": "save_button_label",
             "optional": true,
-            "rank": 24,
+            "rank": 22,
             "value": "text"
         },
         "ABO": {
             "caption": "Toolbar Background Color",
             "default_val": "#f8fafc",
+            "doc": "Background color of the toolbar area.",
             "editor": "Color",
             "in_style": true,
             "name": "toolbar_background_color",
             "optional": true,
-            "rank": 25
+            "rank": 23
         },
         "ABP": {
             "caption": "Button Background Color",
             "default_val": "#ffffff",
+            "doc": "Background color used for toolbar buttons.",
             "editor": "Color",
             "in_style": true,
             "name": "button_background_color",
             "optional": true,
-            "rank": 26
+            "rank": 24
         },
         "ABQ": {
             "caption": "Button Text Color",
             "default_val": "#111827",
+            "doc": "Text color used inside toolbar buttons.",
             "editor": "Color",
             "in_style": true,
             "name": "button_text_color",
             "optional": true,
-            "rank": 27
+            "rank": 25
         },
         "ABR": {
             "caption": "Button Border Color",
             "default_val": "#cbd5e1",
+            "doc": "Border color used around toolbar buttons.",
             "editor": "Color",
             "in_style": true,
             "name": "button_border_color",
             "optional": true,
-            "rank": 28
+            "rank": 26
         }
     },
     "has_reset_fn": true,
@@ -299,42 +307,49 @@
     "states": {
         "ABS": {
             "caption": "Value",
+            "doc": "Bubble image value containing the uploaded SVG file URL after a successful save.",
             "name": "value",
             "rank": 0,
             "value": "image"
         },
         "ABT": {
             "caption": "Signature Data URL",
+            "doc": "Current signature as a data:image/svg+xml;base64 data URL. Updates while drawing and before upload.",
             "name": "signature_data_url",
             "rank": 1,
             "value": "text"
         },
         "ABU": {
             "caption": "Is Empty",
+            "doc": "Yes when there is no initial signature and no drawn stroke.",
             "name": "is_empty",
             "rank": 2,
             "value": "boolean"
         },
         "ABV": {
             "caption": "Is Drawing",
+            "doc": "Yes while the user is actively drawing a stroke.",
             "name": "is_drawing",
             "rank": 3,
             "value": "boolean"
         },
         "ABW": {
             "caption": "Is Uploading",
+            "doc": "Yes while the SVG signature is being uploaded to Bubble.",
             "name": "is_uploading",
             "rank": 4,
             "value": "boolean"
         },
         "ABX": {
             "caption": "Stroke Count",
+            "doc": "Number of user-drawn strokes currently stored. Initial signature images are not counted as strokes.",
             "name": "stroke_count",
             "rank": 5,
             "value": "number"
         },
         "ABY": {
             "caption": "Last Error",
+            "doc": "Most recent runtime error message, or blank when the last operation succeeded.",
             "name": "last_error",
             "rank": 6,
             "value": "text"

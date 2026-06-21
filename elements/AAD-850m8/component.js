@@ -240,20 +240,28 @@ function(props) {
         return output;
     }
 
+    function roundCoordinate(value) {
+        return Math.round(Number(value || 0) * 10) / 10;
+    }
+
+    function formatPoint(point) {
+        return roundCoordinate(point.x) + " " + roundCoordinate(point.y);
+    }
+
     function pointsToPath(points) {
         if (!points || !points.length) return "";
         if (points.length === 1) {
-            return "M " + points[0].x + " " + points[0].y + " L " + (points[0].x + 0.1) + " " + points[0].y;
+            return "M " + formatPoint(points[0]) + " L " + roundCoordinate(points[0].x + 0.1) + " " + roundCoordinate(points[0].y);
         }
 
-        let path = "M " + points[0].x + " " + points[0].y;
+        let path = "M " + formatPoint(points[0]);
         for (let i = 1; i < points.length - 1; i += 1) {
             const midX = (points[i].x + points[i + 1].x) / 2;
             const midY = (points[i].y + points[i + 1].y) / 2;
-            path += " Q " + points[i].x + " " + points[i].y + " " + midX + " " + midY;
+            path += " Q " + formatPoint(points[i]) + " " + roundCoordinate(midX) + " " + roundCoordinate(midY);
         }
         const last = points[points.length - 1];
-        path += " L " + last.x + " " + last.y;
+        path += " L " + formatPoint(last);
         return path;
     }
 
@@ -404,22 +412,36 @@ function(props) {
 
     function pointFromEvent(event) {
         const native = event && event.nativeEvent ? event.nativeEvent : {};
-        const x = Number.isFinite(native.locationX) ? native.locationX : 0;
-        const y = Number.isFinite(native.locationY) ? native.locationY : 0;
+        if (!Number.isFinite(native.locationX) || !Number.isFinite(native.locationY)) return null;
+        const x = native.locationX;
+        const y = native.locationY;
         return {
-            x: Math.max(0, Math.min(canvasWidth, x)),
-            y: Math.max(0, Math.min(canvasHeight, y)),
+            x: roundCoordinate(Math.max(0, Math.min(canvasWidth, x))),
+            y: roundCoordinate(Math.max(0, Math.min(canvasHeight, y))),
             time: Date.now()
         };
     }
 
-    function shouldAddPoint(point) {
+    function distanceFromLastPoint(point) {
         const stroke = currentStrokeRef.current;
-        if (!stroke.length) return true;
+        if (!stroke.length) return Infinity;
         const last = stroke[stroke.length - 1];
         const dx = point.x - last.x;
         const dy = point.y - last.y;
-        return dx * dx + dy * dy >= config.minDistance * config.minDistance;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function shouldAddPoint(point, force) {
+        const distance = distanceFromLastPoint(point);
+        if (distance === Infinity) return true;
+        return distance >= (force ? 0.5 : config.minDistance);
+    }
+
+    function appendPointToCurrentStroke(point, force) {
+        if (!point || !shouldAddPoint(point, force)) return false;
+        const nextStroke = currentStrokeRef.current.concat([point]);
+        setCurrentStrokeBoth(nextStroke);
+        return true;
     }
 
     function beginStroke(event) {
@@ -427,6 +449,10 @@ function(props) {
         if (activeRef.current) return;
         activeRef.current = true;
         const point = pointFromEvent(event);
+        if (!point) {
+            activeRef.current = false;
+            return;
+        }
         setCurrentStrokeBoth([point]);
         lastMoveAtRef.current = Date.now();
         safePublishState("is_drawing", true);
@@ -445,12 +471,21 @@ function(props) {
         const now = Date.now();
         if (config.throttleMs && now - lastMoveAtRef.current < config.throttleMs) return;
         const point = pointFromEvent(event);
-        if (!shouldAddPoint(point)) return;
-        lastMoveAtRef.current = now;
-        setCurrentStrokeBoth(currentStrokeRef.current.concat([point]));
+        if (appendPointToCurrentStroke(point, false)) {
+            lastMoveAtRef.current = now;
+        }
     }
 
-    function endStroke() {
+    function endStroke(event) {
+        if (!activeRef.current && !currentStrokeRef.current.length) {
+            safePublishState("is_drawing", false);
+            return;
+        }
+
+        if (event && currentStrokeRef.current.length) {
+            appendPointToCurrentStroke(pointFromEvent(event), true);
+        }
+
         activeRef.current = false;
         const stroke = currentStrokeRef.current;
         if (!stroke.length) {
@@ -585,12 +620,12 @@ function(props) {
                 onMoveShouldSetResponderCapture={() => enabledRef.current && !isUploadingRef.current}
                 onResponderGrant={(event) => beginStroke(event)}
                 onResponderMove={(event) => moveStroke(event)}
-                onResponderRelease={() => endStroke()}
-                onResponderTerminate={() => endStroke()}
+                onResponderRelease={(event) => endStroke(event)}
+                onResponderTerminate={(event) => endStroke(event)}
                 onTouchStart={(event) => beginStrokeIfNeeded(event)}
                 onTouchMove={(event) => moveStroke(event)}
-                onTouchEnd={() => endStroke()}
-                onTouchCancel={() => endStroke()}
+                onTouchEnd={(event) => endStroke(event)}
+                onTouchCancel={(event) => endStroke(event)}
             >
                 <SvgXml xml={xml} width={canvasWidth} height={canvasHeight} />
                 {empty ? (

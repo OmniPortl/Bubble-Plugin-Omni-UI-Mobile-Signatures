@@ -1,8 +1,10 @@
 {
     "caption": "Set enabled",
+    "doc": "Turns drawing and toolbar interaction on or off at runtime.",
     "fields": {
         "AAC": {
             "caption": "Enabled",
+            "doc": "Checked enables drawing and toolbar actions. Unchecked disables user interaction.",
             "editor": "Checkbox",
             "name": "enabled",
             "optional": false,
