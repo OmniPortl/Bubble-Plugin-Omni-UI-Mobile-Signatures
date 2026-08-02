@@ -1,20 +1,10 @@
 function(instance, properties, context) {
-    instance.data = instance.data || {};
-    if (typeof instance.data.omniSignatureBootstrap === "function") {
-        instance.data.omniSignatureBootstrap();
-    }
-
+  var runtime = instance.data && instance.data.omniSignatureRuntime;
+  if (runtime && typeof runtime.setEnabled === "function") {
     var enabled = properties && properties.enabled;
     if (typeof enabled === "function") {
-        try {
-            enabled = enabled();
-        } catch (_error) {
-            enabled = true;
-        }
+      try { enabled = enabled(); } catch (_error) { enabled = true; }
     }
-
-    var runtime = instance.data.omniSignatureRuntime || instance.data.omniSignatureMobileRuntime;
-    if (runtime && runtime.helpers && typeof runtime.helpers.setEnabled === "function") {
-        runtime.helpers.setEnabled(enabled, context);
-    }
+    runtime.setEnabled(enabled);
+  }
 }
