@@ -1,0 +1,232 @@
+{
+    "add_is_visible": true,
+    "category": "visual elements",
+    "default_dim": {
+        "height": 200,
+        "width": 400
+    },
+    "display": "New Element",
+    "events": {
+        "AAn": {
+            "caption": "",
+            "name": ""
+        },
+        "AAo": {
+            "caption": "",
+            "name": ""
+        },
+        "AAp": {
+            "caption": "",
+            "name": ""
+        },
+        "AAq": {
+            "caption": "",
+            "name": ""
+        },
+        "AAr": {
+            "caption": "",
+            "name": ""
+        },
+        "AAs": {
+            "caption": "",
+            "name": ""
+        }
+    },
+    "fields": {
+        "AAF": {
+            "caption": "",
+            "name": "",
+            "rank": 0
+        },
+        "AAG": {
+            "caption": "",
+            "name": "",
+            "rank": 1
+        },
+        "AAH": {
+            "caption": "",
+            "name": "",
+            "rank": 2
+        },
+        "AAI": {
+            "caption": "",
+            "name": "",
+            "rank": 3
+        },
+        "AAJ": {
+            "caption": "",
+            "name": "",
+            "rank": 4
+        },
+        "AAK": {
+            "caption": "",
+            "name": "",
+            "rank": 5
+        },
+        "AAL": {
+            "caption": "",
+            "name": "",
+            "rank": 6
+        },
+        "AAM": {
+            "caption": "",
+            "name": "",
+            "rank": 7
+        },
+        "AAN": {
+            "caption": "",
+            "name": "",
+            "rank": 8
+        },
+        "AAO": {
+            "caption": "",
+            "name": "",
+            "rank": 9
+        },
+        "AAP": {
+            "caption": "",
+            "name": "",
+            "rank": 10
+        },
+        "AAQ": {
+            "caption": "",
+            "name": "",
+            "rank": 11
+        },
+        "AAR": {
+            "caption": "",
+            "name": "",
+            "rank": 12
+        },
+        "AAS": {
+            "caption": "",
+            "name": "",
+            "rank": 13
+        },
+        "AAT": {
+            "caption": "",
+            "name": "",
+            "rank": 14
+        },
+        "AAU": {
+            "caption": "",
+            "name": "",
+            "rank": 15
+        },
+        "AAV": {
+            "caption": "",
+            "name": "",
+            "rank": 16
+        },
+        "AAW": {
+            "caption": "",
+            "name": "",
+            "rank": 17
+        },
+        "AAX": {
+            "caption": "",
+            "name": "",
+            "rank": 18
+        },
+        "AAY": {
+            "caption": "",
+            "name": "",
+            "rank": 19
+        },
+        "AAZ": {
+            "caption": "",
+            "name": "",
+            "rank": 20
+        },
+        "AAa": {
+            "caption": "",
+            "name": "",
+            "rank": 21
+        },
+        "AAb": {
+            "caption": "",
+            "name": "",
+            "rank": 22
+        },
+        "AAc": {
+            "caption": "",
+            "name": "",
+            "rank": 23
+        },
+        "AAd": {
+            "caption": "",
+            "name": "",
+            "rank": 24
+        },
+        "AAe": {
+            "caption": "",
+            "name": "",
+            "rank": 25
+        },
+        "AAf": {
+            "caption": "",
+            "name": "",
+            "rank": 26
+        }
+    },
+    "icon": "ion-android-checkbox-blank",
+    "platform_type": "mobile",
+    "states": {
+        "AAg": {
+            "caption": "",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "",
+            "value": "text"
+        },
+        "AAh": {
+            "caption": "",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "",
+            "value": "text"
+        },
+        "AAi": {
+            "caption": "",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "",
+            "value": "text"
+        },
+        "AAj": {
+            "caption": "",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "",
+            "value": "text"
+        },
+        "AAk": {
+            "caption": "",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "",
+            "value": "text"
+        },
+        "AAl": {
+            "caption": "",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "",
+            "value": "text"
+        },
+        "AAm": {
+            "caption": "",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "",
+            "value": "text"
+        }
+    }
+}
