@@ -1,6 +1,11 @@
 function(instance, properties, context) {
-  var runtime = instance.data && instance.data.omniSignatureRuntime;
-  if (runtime && typeof runtime.saveSignature === "function") {
-    runtime.saveSignature(context || {});
-  }
+    instance.data = instance.data || {};
+    if (typeof instance.data.omniSignatureBootstrap === "function") {
+        instance.data.omniSignatureBootstrap();
+    }
+
+    var runtime = instance.data.omniSignatureRuntime || instance.data.omniSignatureMobileRuntime;
+    if (runtime && runtime.helpers && typeof runtime.helpers.saveSignature === "function") {
+        runtime.helpers.saveSignature(context);
+    }
 }
