@@ -1,232 +1,365 @@
 {
-    "add_is_visible": true,
-    "category": "visual elements",
-    "default_dim": {
-        "height": 200,
-        "width": 400
+  "add_hover_pressed": true,
+  "add_is_visible": true,
+  "autobinding_value": "image",
+  "can_fit_height": true,
+  "can_fit_width": true,
+  "category": "input forms",
+  "default_dim": {
+    "height": 200,
+    "width": 400
+  },
+  "display": "Mobile Signature Pad",
+  "events": {
+    "AAp": {
+      "caption": "Signature Started",
+      "name": "signature_started"
     },
-    "display": "New Element",
-    "events": {
-        "AAn": {
-            "caption": "",
-            "name": ""
-        },
-        "AAo": {
-            "caption": "",
-            "name": ""
-        },
-        "AAp": {
-            "caption": "",
-            "name": ""
-        },
-        "AAq": {
-            "caption": "",
-            "name": ""
-        },
-        "AAr": {
-            "caption": "",
-            "name": ""
-        },
-        "AAs": {
-            "caption": "",
-            "name": ""
-        }
+    "AAq": {
+      "caption": "Signature Changed",
+      "name": "signature_changed"
     },
-    "fields": {
-        "AAF": {
-            "caption": "",
-            "name": "",
-            "rank": 0
-        },
-        "AAG": {
-            "caption": "",
-            "name": "",
-            "rank": 1
-        },
-        "AAH": {
-            "caption": "",
-            "name": "",
-            "rank": 2
-        },
-        "AAI": {
-            "caption": "",
-            "name": "",
-            "rank": 3
-        },
-        "AAJ": {
-            "caption": "",
-            "name": "",
-            "rank": 4
-        },
-        "AAK": {
-            "caption": "",
-            "name": "",
-            "rank": 5
-        },
-        "AAL": {
-            "caption": "",
-            "name": "",
-            "rank": 6
-        },
-        "AAM": {
-            "caption": "",
-            "name": "",
-            "rank": 7
-        },
-        "AAN": {
-            "caption": "",
-            "name": "",
-            "rank": 8
-        },
-        "AAO": {
-            "caption": "",
-            "name": "",
-            "rank": 9
-        },
-        "AAP": {
-            "caption": "",
-            "name": "",
-            "rank": 10
-        },
-        "AAQ": {
-            "caption": "",
-            "name": "",
-            "rank": 11
-        },
-        "AAR": {
-            "caption": "",
-            "name": "",
-            "rank": 12
-        },
-        "AAS": {
-            "caption": "",
-            "name": "",
-            "rank": 13
-        },
-        "AAT": {
-            "caption": "",
-            "name": "",
-            "rank": 14
-        },
-        "AAU": {
-            "caption": "",
-            "name": "",
-            "rank": 15
-        },
-        "AAV": {
-            "caption": "",
-            "name": "",
-            "rank": 16
-        },
-        "AAW": {
-            "caption": "",
-            "name": "",
-            "rank": 17
-        },
-        "AAX": {
-            "caption": "",
-            "name": "",
-            "rank": 18
-        },
-        "AAY": {
-            "caption": "",
-            "name": "",
-            "rank": 19
-        },
-        "AAZ": {
-            "caption": "",
-            "name": "",
-            "rank": 20
-        },
-        "AAa": {
-            "caption": "",
-            "name": "",
-            "rank": 21
-        },
-        "AAb": {
-            "caption": "",
-            "name": "",
-            "rank": 22
-        },
-        "AAc": {
-            "caption": "",
-            "name": "",
-            "rank": 23
-        },
-        "AAd": {
-            "caption": "",
-            "name": "",
-            "rank": 24
-        },
-        "AAe": {
-            "caption": "",
-            "name": "",
-            "rank": 25
-        },
-        "AAf": {
-            "caption": "",
-            "name": "",
-            "rank": 26
-        }
+    "AAr": {
+      "caption": "Signature Ended",
+      "name": "signature_ended"
     },
-    "icon": "ion-android-checkbox-blank",
-    "platform_type": "mobile",
-    "states": {
-        "AAg": {
-            "caption": "",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "name": "",
-            "value": "text"
-        },
-        "AAh": {
-            "caption": "",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "name": "",
-            "value": "text"
-        },
-        "AAi": {
-            "caption": "",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "name": "",
-            "value": "text"
-        },
-        "AAj": {
-            "caption": "",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "name": "",
-            "value": "text"
-        },
-        "AAk": {
-            "caption": "",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "name": "",
-            "value": "text"
-        },
-        "AAl": {
-            "caption": "",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "name": "",
-            "value": "text"
-        },
-        "AAm": {
-            "caption": "",
-            "initialization_code": {
-                "fn": "function(properties, context) {\n\n\n\n}"
-            },
-            "name": "",
-            "value": "text"
-        }
+    "AAs": {
+      "caption": "Signature Saved",
+      "name": "signature_saved"
+    },
+    "AAt": {
+      "caption": "Signature Cleared",
+      "name": "signature_cleared"
+    },
+    "AAu": {
+      "caption": "Signature Error",
+      "name": "signature_error"
     }
+  },
+  "fields": {
+    "AAF": {
+      "caption": "Data / Behavior",
+      "editor": "Label",
+      "name": "data_behavior_settings",
+      "rank": 0,
+      "doc": "Settings that control the starting value, user interaction, and when the SVG signature is uploaded to Bubble."
+    },
+    "AAG": {
+      "caption": "Initial Signature",
+      "editor": "DynamicValue",
+      "name": "initial_signature",
+      "optional": true,
+      "rank": 1,
+      "value": "image",
+      "doc": "Optional Bubble image, image URL, SVG data URL, or image data URL shown as the starting signature. It is displayed as a background image layer and new strokes are drawn on top."
+    },
+    "AAH": {
+      "caption": "Enabled",
+      "default_val": true,
+      "editor": "Checkbox",
+      "name": "enabled",
+      "optional": true,
+      "rank": 2,
+      "doc": "When checked, users can draw and toolbar buttons can run. When unchecked, the pad stays visible but does not accept drawing input."
+    },
+    "AAI": {
+      "caption": "Commit Behavior",
+      "default_val": "on_stroke_end",
+      "editor": "Dropdown",
+      "name": "commit_behavior",
+      "options": "on_stroke_end,manual",
+      "rank": 3,
+      "doc": "Controls when the SVG signature is uploaded into Bubble's image value. on_stroke_end uploads after each completed stroke. manual waits for the Save signature action or toolbar button."
+    },
+    "AAJ": {
+      "caption": "Commit Delay Milliseconds",
+      "default_val": 500,
+      "editor": "DynamicValue",
+      "name": "commit_delay_ms",
+      "optional": true,
+      "rank": 4,
+      "value": "number",
+      "doc": "Delay after a stroke ends before auto-upload runs. Only applies when Commit Behavior is on_stroke_end."
+    },
+    "AAK": {
+      "caption": "File Name Prefix",
+      "default_val": "signature",
+      "editor": "DynamicValue",
+      "name": "file_name_prefix",
+      "optional": true,
+      "rank": 5,
+      "value": "text",
+      "doc": "Prefix used for uploaded SVG file names. The plugin adds a timestamp and .svg extension."
+    },
+    "AAL": {
+      "caption": "SVG Output",
+      "editor": "Label",
+      "name": "output_settings",
+      "rank": 6,
+      "doc": "Native mobile signatures are saved as SVG files. The Signature Data URL state also returns an SVG data URL."
+    },
+    "AAM": {
+      "caption": "Drawing",
+      "editor": "Label",
+      "name": "drawing_settings",
+      "rank": 7,
+      "doc": "Settings that control SVG stroke color, stroke width, smoothing, and pad background."
+    },
+    "AAN": {
+      "caption": "Pen Color",
+      "default_val": "#111827",
+      "editor": "Color",
+      "in_style": true,
+      "name": "pen_color",
+      "optional": true,
+      "rank": 8,
+      "doc": "Color used for new signature strokes."
+    },
+    "AAO": {
+      "caption": "Minimum Stroke Width",
+      "default_val": 0.5,
+      "editor": "DynamicValue",
+      "in_style": true,
+      "name": "min_width",
+      "optional": true,
+      "rank": 9,
+      "value": "number",
+      "doc": "Lower stroke-width bound used to calculate the SVG stroke width."
+    },
+    "AAP": {
+      "caption": "Maximum Stroke Width",
+      "default_val": 2.5,
+      "editor": "DynamicValue",
+      "in_style": true,
+      "name": "max_width",
+      "optional": true,
+      "rank": 10,
+      "value": "number",
+      "doc": "Upper stroke-width bound used to calculate the SVG stroke width."
+    },
+    "AAQ": {
+      "caption": "Background Color",
+      "default_val": "#ffffff",
+      "editor": "Color",
+      "in_style": true,
+      "name": "background_color",
+      "optional": true,
+      "rank": 11,
+      "doc": "Background fill used inside the signature SVG and visible drawing area."
+    },
+    "AAR": {
+      "caption": "Minimum Point Distance",
+      "default_val": 5,
+      "editor": "DynamicValue",
+      "name": "min_distance",
+      "optional": true,
+      "rank": 12,
+      "value": "number",
+      "doc": "Minimum distance a pointer must move before another point is recorded. Higher values produce smaller, simpler SVG paths."
+    },
+    "AAS": {
+      "caption": "Throttle Milliseconds",
+      "default_val": 16,
+      "editor": "DynamicValue",
+      "name": "throttle_ms",
+      "optional": true,
+      "rank": 13,
+      "value": "number",
+      "doc": "Minimum time between recorded move points while drawing. Lower values capture more detail; higher values reduce path size."
+    },
+    "AAT": {
+      "caption": "UI",
+      "editor": "Label",
+      "name": "ui_settings",
+      "rank": 14,
+      "doc": "Toolbar, labels, and button style settings for the visible signature control."
+    },
+    "AAU": {
+      "caption": "Placeholder Text",
+      "default_val": "Sign here",
+      "editor": "DynamicValue",
+      "name": "placeholder_text",
+      "optional": true,
+      "rank": 15,
+      "value": "text",
+      "doc": "Text shown centered in the pad while no initial signature or drawn strokes are present."
+    },
+    "AAV": {
+      "caption": "Show Toolbar",
+      "default_val": true,
+      "editor": "Checkbox",
+      "name": "show_toolbar",
+      "optional": true,
+      "rank": 16,
+      "doc": "Shows or hides the toolbar container at the bottom of the element."
+    },
+    "AAW": {
+      "caption": "Show Clear Button",
+      "default_val": true,
+      "editor": "Checkbox",
+      "name": "show_clear_button",
+      "optional": true,
+      "rank": 17,
+      "doc": "Shows or hides the Clear button in the toolbar."
+    },
+    "AAX": {
+      "caption": "Show Undo Button",
+      "default_val": true,
+      "editor": "Checkbox",
+      "name": "show_undo_button",
+      "optional": true,
+      "rank": 18,
+      "doc": "Shows or hides the Undo button in the toolbar."
+    },
+    "AAY": {
+      "caption": "Show Save Button",
+      "default_val": true,
+      "editor": "Checkbox",
+      "name": "show_save_button",
+      "optional": true,
+      "rank": 19,
+      "doc": "Shows or hides the Save button in the toolbar. The workflow action can still save when this is hidden."
+    },
+    "AAZ": {
+      "caption": "Clear Button Label",
+      "default_val": "Clear",
+      "editor": "DynamicValue",
+      "name": "clear_button_label",
+      "optional": true,
+      "rank": 20,
+      "value": "text",
+      "doc": "Text displayed inside the Clear toolbar button."
+    },
+    "AAa": {
+      "caption": "Undo Button Label",
+      "default_val": "Undo",
+      "editor": "DynamicValue",
+      "name": "undo_button_label",
+      "optional": true,
+      "rank": 21,
+      "value": "text",
+      "doc": "Text displayed inside the Undo toolbar button."
+    },
+    "AAb": {
+      "caption": "Save Button Label",
+      "default_val": "Save",
+      "editor": "DynamicValue",
+      "name": "save_button_label",
+      "optional": true,
+      "rank": 22,
+      "value": "text",
+      "doc": "Text displayed inside the Save toolbar button."
+    },
+    "AAc": {
+      "caption": "Toolbar Background Color",
+      "default_val": "#f8fafc",
+      "editor": "Color",
+      "in_style": true,
+      "name": "toolbar_background_color",
+      "optional": true,
+      "rank": 23,
+      "doc": "Background color of the toolbar area."
+    },
+    "AAd": {
+      "caption": "Button Background Color",
+      "default_val": "#ffffff",
+      "editor": "Color",
+      "in_style": true,
+      "name": "button_background_color",
+      "optional": true,
+      "rank": 24,
+      "doc": "Background color used for toolbar buttons."
+    },
+    "AAe": {
+      "caption": "Button Text Color",
+      "default_val": "#111827",
+      "editor": "Color",
+      "in_style": true,
+      "name": "button_text_color",
+      "optional": true,
+      "rank": 25,
+      "doc": "Text color used inside toolbar buttons."
+    },
+    "AAf": {
+      "caption": "Button Border Color",
+      "default_val": "#cbd5e1",
+      "editor": "Color",
+      "in_style": true,
+      "name": "button_border_color",
+      "optional": true,
+      "rank": 26,
+      "doc": "Border color used around toolbar buttons."
+    }
+  },
+  "has_reset_fn": true,
+  "icon": "ion-edit",
+  "platform_type": "mobile",
+  "property_applications": {
+    "Background": true,
+    "Border": true,
+    "BoxShadow": true,
+    "Font": true,
+    "MinWidth": true,
+    "Padding": true,
+    "resizable": true
+  },
+  "states": {
+    "AAg": {
+      "caption": "Value",
+      "initialization_code": {
+        "fn": "function(properties, context) {\n\n\n\n}"
+      },
+      "name": "value",
+      "value": "image"
+    },
+    "AAh": {
+      "caption": "Signature Data URL",
+      "initialization_code": {
+        "fn": "function(properties, context) {\n\n\n\n}"
+      },
+      "name": "signature_data_url",
+      "value": "text"
+    },
+    "AAi": {
+      "caption": "Is Empty",
+      "initialization_code": {
+        "fn": "function(properties, context) {\n\n\n\n}"
+      },
+      "name": "is_empty",
+      "value": "boolean"
+    },
+    "AAj": {
+      "caption": "Is Drawing",
+      "initialization_code": {
+        "fn": "function(properties, context) {\n\n\n\n}"
+      },
+      "name": "is_drawing",
+      "value": "boolean"
+    },
+    "AAk": {
+      "caption": "Is Uploading",
+      "initialization_code": {
+        "fn": "function(properties, context) {\n\n\n\n}"
+      },
+      "name": "is_uploading",
+      "value": "boolean"
+    },
+    "AAl": {
+      "caption": "Stroke Count",
+      "initialization_code": {
+        "fn": "function(properties, context) {\n\n\n\n}"
+      },
+      "name": "stroke_count",
+      "value": "number"
+    },
+    "AAm": {
+      "caption": "Last Error",
+      "initialization_code": {
+        "fn": "function(properties, context) {\n\n\n\n}"
+      },
+      "name": "last_error",
+      "value": "text"
+    }
+  },
+  "support_autobinding": true
 }
