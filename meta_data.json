@@ -1,4 +1,9 @@
 {
+    "categories": {
+        "0": "technical"
+    },
+    "image": "//meta-q.cdn.bubble.io/f1785358391774x611584170094097700/OmniPortl%20Black%20hole%20logo%20black%20on%20white%20square.png",
+    "license": "private",
     "name": "Omni UI | Signatures Mobile & Web",
     "platforms_new": "both"
 }

@@ -1,4 +1,0 @@
-{
-    "caption": "Undo last stroke",
-    "doc": "Removes the most recent user-drawn stroke and republishes the current signature states."
-}
