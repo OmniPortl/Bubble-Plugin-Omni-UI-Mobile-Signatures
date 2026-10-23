@@ -925,8 +925,13 @@ function(instance, context) {
         buttonTextColor: readColor(properties, "button_text_color", "#111827"),
         buttonBorderColor: readColor(properties, "button_border_color", "#cbd5e1"),
         makeFilePrivate: readBoolean(properties, "make_file_private", false),
-        attachToId: readThingId(properties, "attach_to")
+        attachToId: readThingId(properties, "attach_to"),
+        attachToThing: readThingObject(properties, "attach_to")
       };
+    }
+    function readThingObject(properties, name) {
+      const value = readProperty(properties, name, null);
+      return value !== null && typeof value === "object" ? value : null;
     }
     function readThingId(properties, name) {
       const value = readProperty(properties, name, null);
@@ -1293,7 +1298,7 @@ function(instance, context) {
         const fileName = this.fileName();
         const attachToId = this.privateAttachToId();
         if (attachToId) {
-          return this.uploadWithContext(dataUrl, context, fileName, attachToId);
+          return this.uploadPrivate(dataUrl, context, fileName, attachToId);
         }
         if (typeof this.instance.uploadFile === "function") {
           try {
@@ -1327,6 +1332,27 @@ function(instance, context) {
           }
         });
       }
+      // Private upload: POST to the app's own /fileupload endpoint with attach_to (the thing's unique id), which is
+      // what Bubble's own uploader sends. Verified on ssi-toolbox: 200 + URL; the file then returns 401 anonymously.
+      // Do not pass a unique id string to context.uploadContent: Bubble only attaches when its 4th argument is the
+      // Bubble thing object (it reads the thing's _id itself), otherwise it alerts "Trying to attach an upload to a
+      // non Bubble thing" and returns an empty URL. The thing object is used only as a fallback.
+      async uploadPrivate(dataUrl, context, fileName, attachToId) {
+        const base64 = dataUrlToBase64(dataUrl);
+        let firstError = null;
+        try {
+          const url = await postPrivateFileUpload(fileName, base64, attachToId);
+          if (url) return url;
+        } catch (error) {
+          firstError = error;
+        }
+        const thing = this.config.attachToThing;
+        if (thing && typeof context?.uploadContent === "function") {
+          const url = await this.uploadWithContext(dataUrl, context, fileName, thing);
+          if (url) return url;
+        }
+        throw firstError || new Error("Bubble returned an empty upload URL. The private signature was not uploaded.");
+      }
       uploadWithContext(dataUrl, context, fileName, attachToId = "") {
         return new Promise((resolve, reject) => {
           if (typeof context?.uploadContent !== "function") {
@@ -1349,6 +1375,41 @@ function(instance, context) {
         });
       }
     };
+    function bubbleUploadUrl() {
+      if (typeof window === "undefined" || !window.location) return "/fileupload";
+      const match = /^\/(version-[^/]+)(?:\/|$)/i.exec(window.location.pathname || "");
+      return match ? `${window.location.origin}/${match[1]}/fileupload` : `${window.location.origin}/fileupload`;
+    }
+    function postPrivateFileUpload(fileName, base64, attachToId) {
+      return new Promise((resolve, reject) => {
+        if (typeof XMLHttpRequest === "undefined") {
+          reject(new Error("Private uploads require XMLHttpRequest support. The signature was not uploaded."));
+          return;
+        }
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", bubbleUploadUrl(), true);
+        try {
+          xhr.setRequestHeader("Content-Type", "application/json");
+        } catch {
+        }
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            let url = "";
+            try {
+              const parsed = JSON.parse(xhr.responseText);
+              url = typeof parsed === "string" ? parsed : "";
+            } catch {
+              url = String(xhr.responseText || "").trim().replace(/^"|"$/g, "");
+            }
+            resolve(url);
+          } else {
+            reject(new Error(`Bubble private file upload failed with status ${xhr.status}. The signature was not uploaded.`));
+          }
+        };
+        xhr.onerror = () => reject(new Error("Bubble private file upload failed due to a network error. The signature was not uploaded."));
+        xhr.send(JSON.stringify({ name: fileName, contents: base64, private: true, attach_to: attachToId }));
+      });
+    }
     function dataUrlToBase64(dataUrl) {
       const comma = dataUrl.indexOf(",");
       return comma >= 0 ? dataUrl.slice(comma + 1) : dataUrl;
