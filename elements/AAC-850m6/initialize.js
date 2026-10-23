@@ -1332,24 +1332,27 @@ function(instance, context) {
           }
         });
       }
-      // Private upload: POST to the app's own /fileupload endpoint with attach_to (the thing's unique id), which is
-      // what Bubble's own uploader sends. Verified on ssi-toolbox: 200 + URL; the file then returns 401 anonymously.
-      // Do not pass a unique id string to context.uploadContent: Bubble only attaches when its 4th argument is the
-      // Bubble thing object (it reads the thing's _id itself), otherwise it alerts "Trying to attach an upload to a
-      // non Bubble thing" and returns an empty URL. The thing object is used only as a fallback.
+      // Private upload. Primary: Bubble's documented context.uploadContent(name, contents, callback, attach_to) with
+      // attach_to = the Bubble THING object exactly as Bubble passes it in properties (Bubble reads its _id itself; a
+      // unique id string is rejected with "Trying to attach an upload to a non Bubble thing" and an empty URL).
+      // Fallback, only if that throws or returns an empty URL: POST {name, contents, private, attach_to: <id>} to the
+      // app's own <version>/fileupload endpoint, which is what Bubble's uploader sends.
       async uploadPrivate(dataUrl, context, fileName, attachToId) {
-        const base64 = dataUrlToBase64(dataUrl);
+        const thing = this.config.attachToThing;
         let firstError = null;
+        if (thing && typeof context?.uploadContent === "function") {
+          try {
+            const url = await this.uploadWithContext(dataUrl, context, fileName, thing);
+            if (url) return url;
+          } catch (error) {
+            firstError = error;
+          }
+        }
         try {
-          const url = await postPrivateFileUpload(fileName, base64, attachToId);
+          const url = await postPrivateFileUpload(fileName, dataUrlToBase64(dataUrl), attachToId);
           if (url) return url;
         } catch (error) {
-          firstError = error;
-        }
-        const thing = this.config.attachToThing;
-        if (thing && typeof context?.uploadContent === "function") {
-          const url = await this.uploadWithContext(dataUrl, context, fileName, thing);
-          if (url) return url;
+          firstError = firstError || error;
         }
         throw firstError || new Error("Bubble returned an empty upload URL. The private signature was not uploaded.");
       }
