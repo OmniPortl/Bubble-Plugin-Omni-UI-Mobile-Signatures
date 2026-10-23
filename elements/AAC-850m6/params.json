@@ -308,6 +308,40 @@
       "optional": true,
       "rank": 28,
       "doc": "Border color used around toolbar buttons."
+    },
+    "ABZ": {
+      "caption": "Private Upload",
+      "editor": "Label",
+      "name": "private_upload_settings",
+      "rank": 29,
+      "doc": "Optional settings that store the saved signature as a private Bubble file attached to a thing, so the thing's privacy rules control who can open it."
+    },
+    "ABa": {
+      "caption": "Make file private",
+      "default_val": false,
+      "editor": "Checkbox",
+      "name": "make_file_private",
+      "optional": true,
+      "rank": 30,
+      "doc": "When checked, the signature file is uploaded as a private Bubble file attached to the thing in Attach to (private). If that thing is empty, the save fails with Signature Error instead of uploading a public file. When unchecked, the file is uploaded as a public file, as before."
+    },
+    "ABb": {
+      "caption": "Attach to type (private)",
+      "editor": "custom_type",
+      "name": "attach_to_type",
+      "optional": true,
+      "rank": 31,
+      "value": "app_type",
+      "doc": "Data type of the thing the private signature file belongs to, for example form_object. Required when Make file private is checked."
+    },
+    "ABc": {
+      "caption": "Attach to (private)",
+      "editor": "DynamicValue",
+      "name": "attach_to",
+      "optional": true,
+      "rank": 32,
+      "value": "custom_data_ABb",
+      "doc": "The thing the private signature file is attached to, for example Parent group's form_object. The file then inherits that thing's privacy rules. The thing must already exist. Only used when Make file private is checked."
     }
   },
   "has_reset_fn": true,

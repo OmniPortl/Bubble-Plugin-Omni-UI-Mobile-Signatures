@@ -923,8 +923,29 @@ function(instance, context) {
         toolbarBackgroundColor: readColor(properties, "toolbar_background_color", "#f8fafc"),
         buttonBackgroundColor: readColor(properties, "button_background_color", "#ffffff"),
         buttonTextColor: readColor(properties, "button_text_color", "#111827"),
-        buttonBorderColor: readColor(properties, "button_border_color", "#cbd5e1")
+        buttonBorderColor: readColor(properties, "button_border_color", "#cbd5e1"),
+        makeFilePrivate: readBoolean(properties, "make_file_private", false),
+        attachToId: readThingId(properties, "attach_to")
       };
+    }
+    function readThingId(properties, name) {
+      const value = readProperty(properties, name, null);
+      if (value === null || value === "") return "";
+      if (typeof value === "string" || typeof value === "number") return String(value).trim();
+      if (typeof value === "object") {
+        const thing = value;
+        if (typeof thing.get === "function") {
+          try {
+            const id = thing.get("_id");
+            if (id) return String(id).trim();
+          } catch {
+          }
+        }
+        for (const key of ["_id", "unique_id", "id"]) {
+          if (typeof thing[key] === "string" && thing[key].trim()) return thing[key].trim();
+        }
+      }
+      return "";
     }
     function sanitizeFilePrefix(value) {
       return value.replace(/[^a-z0-9_-]+/gi, "-").replace(/^-+|-+$/g, "") || "signature";
@@ -1261,8 +1282,19 @@ function(instance, context) {
         const extension = this.config.outputFormat === "jpeg" ? "jpg" : "png";
         return `${sanitizeFilePrefix(this.config.fileNamePrefix)}-${Date.now()}.${extension}`;
       }
+      privateAttachToId() {
+        if (!this.config.makeFilePrivate) return "";
+        if (!this.config.attachToId) {
+          throw new Error("Make file private is checked, but Attach to (private) is empty. The signature was not uploaded.");
+        }
+        return this.config.attachToId;
+      }
       async uploadDataUrl(dataUrl, context) {
         const fileName = this.fileName();
+        const attachToId = this.privateAttachToId();
+        if (attachToId) {
+          return this.uploadWithContext(dataUrl, context, fileName, attachToId);
+        }
         if (typeof this.instance.uploadFile === "function") {
           try {
             return await this.uploadWithInstance(dataUrlToFile(dataUrl, fileName));
@@ -1295,17 +1327,22 @@ function(instance, context) {
           }
         });
       }
-      uploadWithContext(dataUrl, context, fileName) {
+      uploadWithContext(dataUrl, context, fileName, attachToId = "") {
         return new Promise((resolve, reject) => {
           if (typeof context?.uploadContent !== "function") {
-            reject(new Error("No Bubble file upload utility is available."));
+            reject(new Error(attachToId ? "No Bubble file upload utility is available for private uploads. The signature was not uploaded." : "No Bubble file upload utility is available."));
             return;
           }
+          const callback = (error, url) => {
+            if (error) reject(error);
+            else resolve(url || "");
+          };
           try {
-            context.uploadContent(fileName, dataUrlToBase64(dataUrl), (error, url) => {
-              if (error) reject(error);
-              else resolve(url || "");
-            });
+            if (attachToId) {
+              context.uploadContent(fileName, dataUrlToBase64(dataUrl), callback, attachToId);
+            } else {
+              context.uploadContent(fileName, dataUrlToBase64(dataUrl), callback);
+            }
           } catch (error) {
             reject(error);
           }

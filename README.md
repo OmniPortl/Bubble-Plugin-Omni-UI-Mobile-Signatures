@@ -31,6 +31,28 @@ For native mobile, use either of these save patterns:
 
 Use the `Signature Saved` event to continue workflows after Bubble returns the uploaded file URL.
 
+## Private Signature Files (web)
+
+By default the web element uploads a public Bubble file, as before. To make the signature private, attach it to a thing so the thing's privacy rules decide who can open it.
+
+Example for a form:
+
+- `Make file private` = checked
+- `Attach to type (private)` = `form_object`
+- `Attach to (private)` = `Parent group's form_object`
+
+The signature file then inherits `form_object`'s privacy rules. Users who cannot see that `form_object` cannot open the file URL. `Value` still holds the uploaded file URL, so save it to the thing as before, for example from the `Signature Saved` event.
+
+How it works:
+
+- The plugin calls Bubble's `context.uploadContent(name, base64, callback, attach_to)` with the thing's unique id as `attach_to`.
+- A private save never falls back to a public upload. If the thing is empty or the upload fails, `Signature Error` runs and `Last Error` holds the reason.
+- The thing must already exist when the signature is saved. Create it first when signing a new record.
+- Saved files are PNG by default and named `<File Name Prefix>-<timestamp>.png`, for example `signature-1792700000000.png`. Choose `jpeg` in `Output Format` for `.jpg` files.
+- With `Make file private` unchecked, the element uploads public files exactly as in earlier versions.
+
+Native mobile: the mobile element has no private upload fields. The repository documents no attach-to argument for Bubble's native mobile `uploadContent`, so mobile signatures are still uploaded as public SVG files. To protect mobile signatures, use the web element, or re-upload the file privately in a backend workflow.
+
 ## Parameters
 
 ### Shared Parameters
@@ -67,6 +89,14 @@ These parameters exist on both the mobile and web elements unless noted otherwis
 
 The mobile element has no output format selector. It saves SVG files only.
 
+### Web-Only Private Upload Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| Make file private | yes/no | no | When checked, the signature is uploaded as a private Bubble file attached to the thing in `Attach to (private)`. If that thing is empty, the save fails with `Signature Error` and `Last Error` instead of uploading a public file. |
+| Attach to type (private) | data type | empty | Data type of the thing that owns the file, for example `form_object`. Pick it in the property editor before setting `Attach to (private)`. |
+| Attach to (private) | thing of the chosen type | empty | The thing the file is attached to. The file inherits that thing's privacy rules. The thing must already exist. |
+
 ### Web-Only Output Parameters
 
 | Parameter | Type | Default | Description |
@@ -95,7 +125,7 @@ The mobile element has no output format selector. It saves SVG files only.
 | Signature Ended | Triggered when the user finishes a stroke. |
 | Signature Saved | Triggered after the signature uploads successfully and `Value` is published. |
 | Signature Cleared | Triggered after the signature is cleared. |
-| Signature Error | Triggered when the plugin cannot initialize, export, upload, or save the signature. Check `Last Error`. |
+| Signature Error | Triggered when the plugin cannot initialize, export, upload, or save the signature, including a private save with no `Attach to (private)` thing. Check `Last Error`. |
 
 ## Actions
 
