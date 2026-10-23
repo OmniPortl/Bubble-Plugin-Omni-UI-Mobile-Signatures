@@ -1,4 +1,4 @@
 {
-  "caption": "Save signature",
-  "doc": "Uploads the current mobile SVG signature to Bubble and publishes the uploaded file URL to the Value state."
+    "caption": "Save signature",
+    "doc": "Uploads the current mobile SVG signature to Bubble and publishes the uploaded file URL to the Value state."
 }
