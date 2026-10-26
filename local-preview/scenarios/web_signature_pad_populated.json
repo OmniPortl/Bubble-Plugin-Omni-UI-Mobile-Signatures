@@ -1,0 +1,15 @@
+{
+  "context": { "keys": {} },
+  "datasets": {},
+  "element": "web_signature_pad",
+  "name": "Web Signature Pad — Initial Signature",
+  "properties": {
+    "initial_signature": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMTQ0IiB2aWV3Qm94PSIwIDAgNDAwIDE0NCI+PHBhdGggZD0iTTUwIDk1IEMxMTAgMjAsIDE1MCAxMzAsIDIxMCA2NSBTMzIwIDQwLCAzNTAgOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzExMTgyNyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=",
+    "commit_behavior": "manual",
+    "file_name_prefix": "client-signature",
+    "pen_color": "#111827",
+    "background_color": "#ffffff",
+    "show_toolbar": true
+  },
+  "viewport": { "height": 220, "width": 520 }
+}

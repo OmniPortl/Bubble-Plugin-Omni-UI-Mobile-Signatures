@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "web_elements": [
+    {
+      "display": "Web Signature Pad",
+      "lifecycle_dir": "dist/element_source",
+      "actions": {
+        "Save signature": "dist/action_runs/save-signature.js",
+        "Clear signature": "dist/action_runs/clear-signature.js",
+        "Undo last stroke": "dist/action_runs/undo-last-stroke.js",
+        "Set enabled": "dist/action_runs/set-enabled.js"
+      }
+    }
+  ]
+}

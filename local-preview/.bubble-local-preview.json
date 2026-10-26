@@ -1,0 +1,11 @@
+{
+  "generated_assets": [
+    "index.html",
+    "runtime.js",
+    "server.mjs",
+    "styles.css",
+    "check.mjs"
+  ],
+  "plugin_name": "Omni UI | Signatures Mobile & Web",
+  "version": 1
+}
