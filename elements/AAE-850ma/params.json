@@ -289,6 +289,40 @@
             "name": "button_border_color",
             "optional": true,
             "rank": 26
+        },
+        "AAy": {
+            "caption": "Private Upload",
+            "doc": "Optional settings that store the saved signature as a private Bubble file attached to a thing, so the thing's privacy rules control who can open it.",
+            "editor": "Label",
+            "name": "private_upload_settings",
+            "rank": 27
+        },
+        "AAz": {
+            "caption": "Make file private",
+            "default_val": false,
+            "doc": "When checked, the SVG signature is uploaded as a private Bubble file attached to the thing in Attach to (private). If that thing is empty or the private upload fails, Signature Error runs instead of uploading a public file. When unchecked, the file is uploaded as a public file, as before.",
+            "editor": "Checkbox",
+            "name": "make_file_private",
+            "optional": true,
+            "rank": 28
+        },
+        "ABA": {
+            "caption": "Attach to type (private)",
+            "doc": "Data type of the thing the private signature file belongs to, for example form_object. Required when Make file private is checked.",
+            "editor": "custom_type",
+            "name": "attach_to_type",
+            "optional": true,
+            "rank": 29,
+            "value": "app_type"
+        },
+        "ABB": {
+            "caption": "Attach to (private)",
+            "doc": "The thing the private signature file is attached to, for example Parent group's form_object. The file then inherits that thing's privacy rules. The thing must already exist. Only used when Make file private is checked.",
+            "editor": "DynamicValue",
+            "name": "attach_to",
+            "optional": true,
+            "rank": 30,
+            "value": "custom_data_ABA"
         }
     },
     "has_reset_fn": true,
