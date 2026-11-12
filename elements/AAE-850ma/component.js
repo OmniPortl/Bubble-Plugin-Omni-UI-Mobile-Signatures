@@ -69,6 +69,35 @@ function(props) {
         return value ? String(value) : fallback;
     }
 
+    // The Bubble thing exactly as Bubble passes it in props. Read without readProperty so the
+    // object is never called or unwrapped: uploadContent needs this object, not its id.
+    function readThingObject(source, name) {
+        const value = source ? source[name] : undefined;
+        return value !== null && typeof value === "object" ? value : null;
+    }
+
+    function readThingId(source, name) {
+        const value = source ? source[name] : undefined;
+        if (value === undefined || value === null || value === "") return "";
+        if (typeof value === "string" || typeof value === "number") return String(value).trim();
+        if (typeof value === "object") {
+            if (typeof value.get === "function") {
+                try {
+                    const id = value.get("_id");
+                    if (id) return String(id).trim();
+                } catch (_error) {
+                    // Fall through to plain id keys.
+                }
+            }
+            const keys = ["_id", "unique_id", "id"];
+            for (let i = 0; i < keys.length; i += 1) {
+                const candidate = value[keys[i]];
+                if (typeof candidate === "string" && candidate.trim()) return candidate.trim();
+            }
+        }
+        return "";
+    }
+
     function safePublishState(name, value) {
         try {
             if (instance && typeof instance.publishState === "function") {
@@ -191,7 +220,10 @@ function(props) {
             toolbarBackgroundColor: readColor(source, "toolbar_background_color", "#f8fafc"),
             buttonBackgroundColor: readColor(source, "button_background_color", "#ffffff"),
             buttonTextColor: readColor(source, "button_text_color", "#111827"),
-            buttonBorderColor: readColor(source, "button_border_color", "#cbd5e1")
+            buttonBorderColor: readColor(source, "button_border_color", "#cbd5e1"),
+            makeFilePrivate: readBoolean(source, "make_file_private", false),
+            attachToThing: readThingObject(source, "attach_to"),
+            attachToId: readThingId(source, "attach_to")
         };
     }
 
@@ -316,14 +348,139 @@ function(props) {
         };
     }
 
+    // Settles a node-style callback once, so a late or repeated Bubble callback cannot fire twice.
+    function once(callback) {
+        let settled = false;
+        return function(err, url) {
+            if (settled) return;
+            settled = true;
+            callback(err, url);
+        };
+    }
+
+    // Base URL of the app's own <version>/fileupload endpoint. Only known where window.location
+    // exists (the browser preview of the mobile app). The native runtime has no window.location,
+    // so there is no fallback there and a failed private upload is reported as an error.
+    function bubbleUploadUrl() {
+        let location = null;
+        try {
+            location = typeof window !== "undefined" && window && window.location ? window.location : null;
+        } catch (_error) {
+            location = null;
+        }
+        if (!location || !/^https?:$/i.test(String(location.protocol || "")) || !location.origin) return "";
+        const match = /^\/(version-[^/]+)(?:\/|$)/i.exec(location.pathname || "");
+        return match ? location.origin + "/" + match[1] + "/fileupload" : location.origin + "/fileupload";
+    }
+
+    function postPrivateFileUpload(fileName, base64, attachToId, callback) {
+        const done = once(callback);
+        const uploadUrl = bubbleUploadUrl();
+        if (!uploadUrl) {
+            done(new Error("The private upload fallback needs the app URL, which this mobile runtime does not provide. The signature was not uploaded."));
+            return;
+        }
+        if (typeof XMLHttpRequest === "undefined") {
+            done(new Error("Private uploads require XMLHttpRequest support. The signature was not uploaded."));
+            return;
+        }
+        try {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", uploadUrl, true);
+            try {
+                xhr.setRequestHeader("Content-Type", "application/json");
+            } catch (_error) {
+                // Some runtimes reject header changes; Bubble still reads the JSON body.
+            }
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    let url = "";
+                    try {
+                        const parsed = JSON.parse(xhr.responseText);
+                        url = typeof parsed === "string" ? parsed : "";
+                    } catch (_error) {
+                        url = String(xhr.responseText || "").trim().replace(/^"|"$/g, "");
+                    }
+                    done(null, url);
+                } else {
+                    done(new Error("Bubble private file upload failed with status " + xhr.status + ". The signature was not uploaded."));
+                }
+            };
+            xhr.onerror = function() {
+                done(new Error("Bubble private file upload failed due to a network error. The signature was not uploaded."));
+            };
+            xhr.send(JSON.stringify({ name: fileName, contents: base64, private: true, attach_to: attachToId }));
+        } catch (error) {
+            done(error);
+        }
+    }
+
+    // Private upload. Primary: context.uploadContent(name, contents, callback, attach_to) with
+    // attach_to = the Bubble thing object exactly as Bubble passes it in props (a unique id string
+    // is rejected with "Trying to attach an upload to a non Bubble thing"). Fallback, only if that
+    // throws or returns an empty URL: POST to <version>/fileupload where the app URL is known.
+    // A private save never falls back to a public upload.
+    function uploadPrivate(uploadContext, fileName, base64, attachToThing, attachToId, callback) {
+        const done = once(callback);
+        if (!attachToThing && !attachToId) {
+            done(new Error("Make file private is checked, but Attach to (private) is empty. The signature was not uploaded."));
+            return;
+        }
+
+        function fallback(firstError) {
+            if (!attachToId) {
+                done(firstError || new Error("Bubble returned an empty upload URL. The private signature was not uploaded."));
+                return;
+            }
+            postPrivateFileUpload(fileName, base64, attachToId, function(err, url) {
+                if (!err && url) {
+                    done(null, url);
+                    return;
+                }
+                done(firstError || err || new Error("Bubble returned an empty upload URL. The private signature was not uploaded."));
+            });
+        }
+
+        if (!attachToThing || typeof uploadContext.uploadContent !== "function") {
+            fallback(typeof uploadContext.uploadContent !== "function"
+                ? new Error("No Bubble file upload utility is available for private uploads. The signature was not uploaded.")
+                : null);
+            return;
+        }
+
+        let handled = false;
+        try {
+            uploadContext.uploadContent(fileName, base64, function(err, url) {
+                if (handled) return;
+                handled = true;
+                if (!err && url) {
+                    done(null, url);
+                    return;
+                }
+                fallback(err || new Error("Bubble returned an empty upload URL. The private signature was not uploaded."));
+            }, attachToThing);
+        } catch (error) {
+            if (handled) return;
+            handled = true;
+            fallback(error);
+        }
+    }
+
     function uploadSvg(base64, callback) {
         const uploadContext = contextRef.current || {};
+        const current = getConfig();
+        const fileName = sanitizePrefix(current.fileNamePrefix) + "-" + Date.now() + ".svg";
+
+        if (current.makeFilePrivate) {
+            uploadPrivate(uploadContext, fileName, base64, current.attachToThing, current.attachToId, callback);
+            return;
+        }
+
         if (!uploadContext || typeof uploadContext.uploadContent !== "function") {
             callback(new Error("No Bubble file upload utility is available in this mobile runtime."));
             return;
         }
 
-        const fileName = sanitizePrefix(config.fileNamePrefix) + "-" + Date.now() + ".svg";
         try {
             uploadContext.uploadContent(fileName, base64, function(err, url) {
                 callback(err, url || "");
