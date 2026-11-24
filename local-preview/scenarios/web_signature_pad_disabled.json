@@ -1,0 +1,15 @@
+{
+  "context": { "keys": {} },
+  "datasets": {},
+  "element": "web_signature_pad",
+  "name": "Web Signature Pad — Disabled / Compact",
+  "properties": {
+    "enabled": false,
+    "placeholder_text": "Signature collection is disabled",
+    "show_toolbar": true,
+    "show_save_button": false,
+    "background_color": "#f8fafc",
+    "toolbar_background_color": "#e2e8f0"
+  },
+  "viewport": { "height": 140, "width": 280 }
+}

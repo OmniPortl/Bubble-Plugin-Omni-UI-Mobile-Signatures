@@ -1,0 +1,17 @@
+{
+  "context": { "keys": {} },
+  "datasets": {},
+  "element": "web_signature_pad",
+  "name": "Web Signature Pad — Long Toolbar Labels",
+  "properties": {
+    "placeholder_text": "Please review the agreement and add your full legal signature",
+    "clear_button_label": "Clear entire signature",
+    "undo_button_label": "Undo previous stroke",
+    "save_button_label": "Save and continue",
+    "show_toolbar": true,
+    "button_background_color": "#eef2ff",
+    "button_text_color": "#312e81",
+    "button_border_color": "#a5b4fc"
+  },
+  "viewport": { "height": 260, "width": 760 }
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bubble Local Visual Preview</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="toolbar">
+        <div>
+          <p class="eyebrow">Bubble Plugin Builder</p>
+          <h1>Local visual preview</h1>
+        </div>
+        <div class="toolbar-controls">
+          <label>
+            Element
+            <select id="element-select"></select>
+          </label>
+          <label>
+            Scenario
+            <select id="scenario-select"></select>
+          </label>
+          <label>
+            Width
+            <input id="viewport-width" type="number" min="120" step="10">
+          </label>
+          <label>
+            Height
+            <input id="viewport-height" type="number" min="80" step="10">
+          </label>
+          <button id="apply-update" type="button">Apply update</button>
+          <button id="remount" type="button" class="secondary">Remount</button>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <aside class="inspector">
+          <label>
+            Properties
+            <textarea id="properties-editor" spellcheck="false"></textarea>
+          </label>
+          <label>
+            Local datasets
+            <textarea id="datasets-editor" spellcheck="false"></textarea>
+          </label>
+          <label>
+            Context
+            <textarea id="context-editor" spellcheck="false"></textarea>
+          </label>
+          <details>
+            <summary>Bubble field contract</summary>
+            <pre id="field-contract"></pre>
+          </details>
+        </aside>
+
+        <section class="stage-shell">
+          <div class="stage-meta">
+            <span id="status" data-tone="neutral">Loading…</span>
+            <span id="dimensions"></span>
+          </div>
+          <div id="stage-frame">
+            <div id="bubble-canvas"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script type="module" src="/runtime.js"></script>
+  </body>
+</html>

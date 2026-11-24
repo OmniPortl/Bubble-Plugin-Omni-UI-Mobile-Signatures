@@ -1,0 +1,28 @@
+{
+  "name": "bubble-plugin-omni-ui-mobile-signatures",
+  "private": true,
+  "description": "Source, build and tests for the Omni UI Mobile Signatures Bubble plugin (web and native mobile). Lives on the `source` branch; `main` holds only the files Bubble syncs.",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "npm run typecheck && npm run test && npm run build && npm run smoke && npm run check:shipped",
+    "preview:check": "node local-preview/check.mjs",
+    "preview:local": "node local-preview/server.mjs",
+    "smoke": "node scripts/smoke-built-artifact.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "ship": "node scripts/shipped.mjs",
+    "check:shipped": "node scripts/shipped.mjs --check"
+  },
+  "dependencies": {
+    "signature_pad": "5.1.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "esbuild": "^0.25.8",
+    "jsdom": "^26.1.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

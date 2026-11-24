@@ -1,0 +1,16 @@
+{
+  "context": {
+    "keys": {}
+  },
+  "datasets": {},
+  "element": "web_signature_pad",
+  "name": "Web Signature Pad — Empty",
+  "properties": {
+    "placeholder_text": "Sign here",
+    "show_toolbar": true
+  },
+  "viewport": {
+    "height": 200,
+    "width": 400
+  }
+}

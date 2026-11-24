@@ -1,0 +1,28 @@
+{
+  "elements": [
+    {
+      "display": "Web Signature Pad",
+      "key": "web_signature_pad",
+      "lifecycle": {
+        "initialize": "../dist/element_source/initialize.js",
+        "preview": "../dist/element_source/preview.js",
+        "reset": "../dist/element_source/reset.js",
+        "update": "../dist/element_source/update.js"
+      },
+      "params": "../elements/AAC-850m6/params.json",
+      "source_format": "typescript_build"
+    }
+  ],
+  "external_scripts": [],
+  "external_styles": [],
+  "poll_interval_ms": 750,
+  "purpose": "visual_component_and_local_data_binding",
+  "scenarios": [
+    "scenarios/web_signature_pad.json",
+    "scenarios/web_signature_pad_populated.json",
+    "scenarios/web_signature_pad_disabled.json",
+    "scenarios/web_signature_pad_long_labels.json"
+  ],
+  "selected_element": "web_signature_pad",
+  "version": 1
+}
